@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-logo {
+.main-header .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -13,9 +13,11 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App-Main {
+  background-image: url("./nike-gdc8c61bd3_1920.jpg");
+  background-size: cover;
+  background-color: #ebebeb;
+  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +25,13 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.App-Main button {
+  background-color: #0066ff;
+  border: 0px solid;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 5px;
+}
 .App-link {
   color: #61dafb;
 }
