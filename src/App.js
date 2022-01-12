@@ -45,8 +45,8 @@ function App() {
         <Route exact path="/">
           <Main shoes={shoes} />
         </Route>
-        <Route path="/detail">
-          <Detail />
+        <Route path="/detail/:id">
+          <Detail shoes={shoes} />
         </Route>
 
         <Route path="/:id">
