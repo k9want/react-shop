@@ -3,6 +3,8 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
 import shoesData from "./data";
 
+import { Link, Route, Switch } from "react-router-dom";
+
 function App() {
   let [shoes, shoesState] = useState(shoesData);
 
@@ -34,20 +36,49 @@ function App() {
         </Container>
       </Navbar>
 
+      <Route exact path="/">
+        <Main shoes={shoes} />
+      </Route>
+      <Route path="/detail">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <img
+                src="https://codingapple1.github.io/shop/shoes1.jpg"
+                width="100%"
+              />
+            </div>
+            <div className="col-md-6 mt-4">
+              <h4 className="pt-5">상품명</h4>
+              <p>상품설명</p>
+              <p>120000원</p>
+              <button className="btn btn-outline-secondary">주문하기</button>
+            </div>
+          </div>
+        </div>
+      </Route>
+      {/* <Route path="/card" component={Image}></Route> */}
+    </div>
+  );
+}
+
+function Main(props) {
+  return (
+    <>
       <div className="App-Main">
         <h1>30% Seanson Off</h1>
         <p>This is a simple</p>
-        <button>Learn More</button>
+        <button className="btn btn-outline-light btn-lg"> Learn More </button>
       </div>
 
       <div className="container">
         <div className="row">
-          {shoes.map((shoe, i) => {
+          {props.shoes.map((shoe, i) => {
             return <Card shoes={shoe} i={i} />;
           })}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -65,5 +96,16 @@ function Card(props) {
     </div>
   );
 }
+
+// function Image() {
+//   return (
+//     <div className="col-md-4">
+//       <img
+//         src={`https://codingapple1.github.io/shop/shoes1.jpg`}
+//         width="100%"
+//       />
+//     </div>
+//   );
+// }
 
 export default App;

@@ -25,13 +25,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-.App-Main button {
-  background-color: #0066ff;
-  border: 0px solid;
-  color: white;
-  border-radius: 4px;
-  padding: 4px 5px;
-}
+
 .App-link {
   color: #61dafb;
 }
