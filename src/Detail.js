@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import "./Detail.scss";
@@ -13,9 +13,17 @@ let 제목 = styled.h4`
 `;
 
 function Detail(props) {
+  let [alertShow, alertShowState] = useState(true);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      alertShowState(false);
+    }, 2000);
+  });
+
   let { id } = useParams();
   let shoeId = props.shoes.find(shoe => shoe.id == id);
-  console.log(shoeId);
+  // console.log(shoeId);
   let history = useHistory();
 
   return (
@@ -24,9 +32,9 @@ function Detail(props) {
         <제목 className="red">Detail</제목>
         {/* <제목 색상="blue">Detail</제목> */}
       </박스>
-      <div className="shoe-alert">
-        <p>재고가 얼마 남지 않았습니다. </p>
-      </div>
+      {console.log(alertShow)}
+      {console.log(alertShow === "true")}
+      {alertShow === true ? <Alert /> : null}
       <div className="row">
         <div className="col-md-6">
           <img
@@ -51,6 +59,14 @@ function Detail(props) {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Alert(props) {
+  return (
+    <div className="shoe-alert">
+      <p>재고가 얼마 남지 않았습니다. </p>
     </div>
   );
 }
