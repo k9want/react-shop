@@ -58,7 +58,13 @@ function Detail(props) {
           <h4 className="pt-5">{shoeId.title}</h4>
           <p>{shoeId.content}</p>
           <p>{shoeId.price}원</p>
-          <button className="btn btn-outline-secondary detail-btn">
+
+          <Info info={props.info}></Info>
+
+          <button
+            className="btn btn-outline-secondary detail-btn"
+            onClick={() => props.infoState([9, 4, 6])}
+          >
             주문하기
           </button>
           <button
@@ -73,6 +79,10 @@ function Detail(props) {
       </div>
     </div>
   );
+}
+
+function Info(props) {
+  return <p>재고 : {props.info[0]}</p>;
 }
 
 function Alert(props) {

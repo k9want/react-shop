@@ -9,6 +9,7 @@ import { Link, Route, Switch } from "react-router-dom";
 
 function App() {
   let [shoes, shoesState] = useState(shoesData);
+  let [info, infoState] = useState([10, 4, 6]);
   let [loading, loadingState] = useState(false);
 
   return (
@@ -53,7 +54,7 @@ function App() {
           />
         </Route>
         <Route path="/detail/:id">
-          <Detail shoes={shoes} />
+          <Detail shoes={shoes} info={info} infoState={infoState} />
         </Route>
 
         <Route path="/:id">
@@ -84,6 +85,8 @@ function Main(props) {
         <button
           className="btn btn-outline-secondary"
           onClick={() => {
+            // axios.post("서버 URL", { id: "qma", pw: 1234 });
+
             props.loadingState(true);
             axios
               .get("https://codingapple1.github.io/shop/data2.json")
