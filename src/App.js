@@ -3,6 +3,7 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
 import shoesData from "./data";
 import Detail from "./Detail";
+import axios from "axios";
 
 import { Link, Route, Switch } from "react-router-dom";
 
@@ -43,7 +44,7 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Main shoes={shoes} />
+          <Main shoes={shoes} shoesState={shoesState} />
         </Route>
         <Route path="/detail/:id">
           <Detail shoes={shoes} />
@@ -74,6 +75,24 @@ function Main(props) {
             return <Card shoes={shoe} i={i} />;
           })}
         </div>
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => {
+            axios
+              .get("https://codingapple1.github.io/shop/data2.json")
+              .then(result => {
+                // console.log(result.data);
+                let newShoes = [...props.shoes];
+                newShoes.push(...result.data);
+                props.shoesState(newShoes);
+              })
+              .catch(error => {
+                console.log(error);
+              }); // 서버에 get요청하는 코드 axios.get(데이터 요청할 URL)
+          }}
+        >
+          더보기
+        </button>
       </div>
     </>
   );
