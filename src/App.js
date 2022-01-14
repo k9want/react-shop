@@ -9,6 +9,7 @@ import { Link, Route, Switch } from "react-router-dom";
 
 function App() {
   let [shoes, shoesState] = useState(shoesData);
+  let [loading, loadingState] = useState(false);
 
   return (
     <div className="App">
@@ -44,7 +45,12 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Main shoes={shoes} shoesState={shoesState} />
+          <Main
+            shoes={shoes}
+            shoesState={shoesState}
+            loading={loading}
+            loadingState={loadingState}
+          />
         </Route>
         <Route path="/detail/:id">
           <Detail shoes={shoes} />
@@ -78,13 +84,17 @@ function Main(props) {
         <button
           className="btn btn-outline-secondary"
           onClick={() => {
+            props.loadingState(true);
             axios
               .get("https://codingapple1.github.io/shop/data2.json")
               .then(result => {
                 // console.log(result.data);
-                let newShoes = [...props.shoes];
-                newShoes.push(...result.data);
-                props.shoesState(newShoes);
+                // let newShoes = [...props.shoes];
+                // newShoes.push(...result.data);
+                // props.shoesState(newShoes);
+                props.loadingState(false);
+
+                props.shoesState([...props.shoes, ...result.data]);
               })
               .catch(error => {
                 console.log(error);
@@ -93,6 +103,11 @@ function Main(props) {
         >
           더보기
         </button>
+        {props.loading === true ? (
+          <div>
+            <h4>로딩중.....</h4>
+          </div>
+        ) : null}
       </div>
     </>
   );
@@ -107,7 +122,7 @@ function Card(props) {
       />
       <h4>{props.shoes.title}</h4>
       <p>
-        {props.shoes.content} & {props.shoes.price}
+        {props.shoes.content} & {props.shoes.price}원
       </p>
     </div>
   );

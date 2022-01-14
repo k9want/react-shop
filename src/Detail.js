@@ -39,12 +39,12 @@ function Detail(props) {
         {/* <제목 색상="blue">Detail</제목> */}
       </박스>
 
-      {inputData}
+      {/* {inputData}
       <input
         onChange={e => {
           inputDataState(e.target.value);
         }}
-      />
+      /> */}
 
       {alertShow === true ? <Alert /> : null}
       <div className="row">
