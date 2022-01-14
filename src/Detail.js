@@ -14,12 +14,18 @@ let 제목 = styled.h4`
 
 function Detail(props) {
   let [alertShow, alertShowState] = useState(true);
+  let [inputData, inputDataState] = useState("");
 
   useEffect(() => {
     let timer = setTimeout(() => {
       alertShowState(false);
+      console.log("확인");
+      return () => {
+        console.log("뒷정리");
+        clearTimeout(timer);
+      };
     }, 2000);
-  });
+  }, [alertShow]);
 
   let { id } = useParams();
   let shoeId = props.shoes.find(shoe => shoe.id == id);
@@ -32,8 +38,14 @@ function Detail(props) {
         <제목 className="red">Detail</제목>
         {/* <제목 색상="blue">Detail</제목> */}
       </박스>
-      {console.log(alertShow)}
-      {console.log(alertShow === "true")}
+
+      {inputData}
+      <input
+        onChange={e => {
+          inputDataState(e.target.value);
+        }}
+      />
+
       {alertShow === true ? <Alert /> : null}
       <div className="row">
         <div className="col-md-6">
