@@ -7,6 +7,7 @@ import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import "./Detail.scss";
 import { infoContext } from "./App";
+import { connect, connectAdvanced } from "react-redux";
 
 let 박스 = styled.div`
   padding-top: 30px;
@@ -27,7 +28,7 @@ function Detail(props) {
   useEffect(() => {
     let timer = setTimeout(() => {
       alertShowState(false);
-      console.log("확인");
+
       return () => {
         console.log("뒷정리");
         clearTimeout(timer);
@@ -68,15 +69,21 @@ function Detail(props) {
           <h4 className="pt-5">{shoeId.title}</h4>
           <p>{shoeId.content}</p>
           <p>{shoeId.price}원</p>
-
           <Info info={props.info} id={id}></Info>
-
           <button
             className="btn btn-outline-secondary detail-btn"
-            onClick={() => props.infoState([9, 3, 5])}
+            onClick={() => {
+              props.infoState([9, 3, 5]);
+              props.dispatch({
+                type: "항목추가",
+                payload: { id: 2, name: "converse", quan: 1, price: 75000 },
+              });
+              history.push("/cart");
+            }}
           >
             주문하기
           </button>
+          &nbsp;
           <button
             className="btn btn-outline-secondary detail-btn"
             onClick={() => {
@@ -146,4 +153,12 @@ function Alert(props) {
   );
 }
 
-export default Detail;
+function state를props화(state) {
+  return {
+    state: state.reducer,
+    alertState: state.reducer2,
+  };
+}
+export default connect(state를props화)(Detail);
+
+// export default Detail;

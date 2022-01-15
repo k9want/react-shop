@@ -61,6 +61,10 @@ function reducer(state = 기본state, 액션) {
     let copy = [...state];
     copy[0].quan--;
     return copy;
+  } else if (액션.type === "항목추가") {
+    let copy = [...state];
+    copy.push(액션.payload);
+    return copy;
   } else return state;
 }
 
@@ -68,6 +72,7 @@ let store = createStore(combineReducers({ reducer, reducer2 }));
 
 ReactDOM.render(
   <React.StrictMode>
+    R
     <BrowserRouter>
       <Provider store={store}>
         <App />
