@@ -11,22 +11,25 @@ export let infoContext = React.createContext();
 
 function App() {
   let [shoes, shoesState] = useState(shoesData);
-  let [info, infoState] = useState([10, 4, 6]);
+  let [info, infoState] = useState([10, 4, 6, 5, 6, 8]);
   let [loading, loadingState] = useState(false);
 
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+          <Navbar.Brand>ShoeShop</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/detail">
+              <Nav.Link as={Link} to="/detail/0">
                 Detail
+              </Nav.Link>
+              <Nav.Link as={Link} to="/cart">
+                Cart
               </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -67,7 +70,12 @@ function App() {
           </Route>
 
           <Route path="/:id">
-            <div>아무거나 적었을 때는 이게 보여진다.</div>
+            <h4>
+              <br />
+              해당 상품이 존재하지 않습니다.
+              <br />
+              상품번호를 확인해주세요
+            </h4>
           </Route>
 
           {/* <Route path="/card" component={Image}></Route> */}
@@ -132,15 +140,17 @@ function Card(props) {
 
   return (
     <div className="col-md-4">
-      <img
-        src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`}
-        width="100%"
-      />
-      <h4>{props.shoes.title}</h4>
-      <p>
-        {props.shoes.content} & {props.shoes.price}원
-      </p>
-      <p>재고 : {info[props.i]}</p>
+      <a href={`./detail/${props.shoes.id}`}>
+        <img
+          src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`}
+          width="100%"
+        />
+        <h4>{props.shoes.title}</h4>
+        <p>
+          {props.shoes.content} & {props.shoes.price}원
+        </p>
+        <p>재고 : {info[props.i]}</p>
+      </a>
     </div>
   );
 }

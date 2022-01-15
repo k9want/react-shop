@@ -43,7 +43,7 @@ function Detail(props) {
   return (
     <div className="container">
       <박스>
-        <제목 className="red">Detail</제목>
+        <제목 className="grey">Detail</제목>
         {/* <제목 색상="blue">Detail</제목> */}
       </박스>
 
@@ -58,7 +58,9 @@ function Detail(props) {
       <div className="row">
         <div className="col-md-6">
           <img
-            src="https://codingapple1.github.io/shop/shoes1.jpg"
+            src={`https://codingapple1.github.io/shop/shoes${
+              parseInt(id) + 1
+            }.jpg`}
             width="100%"
           />
         </div>
@@ -67,11 +69,11 @@ function Detail(props) {
           <p>{shoeId.content}</p>
           <p>{shoeId.price}원</p>
 
-          <Info info={props.info}></Info>
+          <Info info={props.info} id={id}></Info>
 
           <button
             className="btn btn-outline-secondary detail-btn"
-            onClick={() => props.infoState([9, 4, 6])}
+            onClick={() => props.infoState([9, 3, 5])}
           >
             주문하기
           </button>
@@ -133,7 +135,7 @@ function TabContent(props) {
 }
 
 function Info(props) {
-  return <p>재고 : {props.info[0]}</p>;
+  return <p>재고 : {props.info[props.id]}</p>;
 }
 
 function Alert(props) {

@@ -1,3 +1,13 @@
+a {
+  text-decoration: none;
+  text-decoration-line: none;
+  color: grey;
+}
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
 .App {
   text-align: center;
 }
@@ -39,4 +49,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.bg-grey {
+  background-color: grey;
 }
