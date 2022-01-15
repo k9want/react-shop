@@ -13,18 +13,35 @@ function Cart(props) {
           <tr>
             <th>index</th>
             <th>상품명</th>
-            <th>설명</th>
+            <th>수량</th>
             <th>가격</th>
+            <th>변경</th>
           </tr>
         </thead>
         <tbody>
-          {props.state.map(shoe => {
+          {props.state.map((shoe, i) => {
             return (
-              <tr>
+              <tr key={i}>
                 <td>{shoe.id}</td>
                 <td>{shoe.name ? shoe.name : shoe.title}</td>
-                <td>{shoe.content}</td>
+                <td>{shoe.quan}</td>
                 <td>{shoe.price}원</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      props.dispatch({ type: "수량증가" });
+                    }}
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() => {
+                      props.dispatch({ type: "수량감소" });
+                    }}
+                  >
+                    -
+                  </button>
+                </td>
               </tr>
             );
           })}
