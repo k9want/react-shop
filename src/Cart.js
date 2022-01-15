@@ -28,6 +28,7 @@ function Cart(props) {
                 <td>{shoe.price}원</td>
                 <td>
                   <button
+                    className="btn btn-outline-secondary"
                     onClick={() => {
                       props.dispatch({ type: "수량증가" });
                     }}
@@ -35,6 +36,7 @@ function Cart(props) {
                     +
                   </button>
                   <button
+                    className="btn btn-outline-secondary"
                     onClick={() => {
                       props.dispatch({ type: "수량감소" });
                     }}
@@ -47,13 +49,26 @@ function Cart(props) {
           })}
         </tbody>
       </Table>
+      {props.alertState === true ? (
+        <div className="shoe-alert">
+          <p>지금 구매하시면 신규할인 15%</p>
+          <br />
+          <button
+            className="btn btn-outline-secondary"
+            onClick={() => props.dispatch({ type: "닫기" })}
+          >
+            닫기
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
 
 function state를props화(state) {
   return {
-    state: state,
+    state: state.reducer,
+    alertState: state.reducer2,
   };
 }
 export default connect(state를props화)(Cart);

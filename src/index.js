@@ -5,7 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
+
+let alertCart = true;
+
+function reducer2(state = alertCart, 액션) {
+  if (액션.type === "닫기") {
+    state = false;
+    return state;
+  } else return state;
+}
 
 let 기본state = [
   {
@@ -55,7 +64,7 @@ function reducer(state = 기본state, 액션) {
   } else return state;
 }
 
-let store = createStore(reducer);
+let store = createStore(combineReducers({ reducer, reducer2 }));
 
 ReactDOM.render(
   <React.StrictMode>
