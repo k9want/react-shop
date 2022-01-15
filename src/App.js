@@ -4,8 +4,8 @@ import "./App.css";
 import shoesData from "./data";
 import Detail from "./Detail";
 import axios from "axios";
-
 import { Link, Route, Switch } from "react-router-dom";
+import Cart from "./Cart";
 
 export let infoContext = React.createContext();
 
@@ -45,31 +45,34 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      <Switch>
-        <Route exact path="/">
-          <infoContext.Provider value={info}>
+      <infoContext.Provider value={info}>
+        <Switch>
+          <Route exact path="/">
             <Main
               shoes={shoes}
               shoesState={shoesState}
               loading={loading}
               loadingState={loadingState}
             />
-          </infoContext.Provider>
-        </Route>
+          </Route>
 
-        <Route path="/detail/:id">
-          <infoContext.Provider value={info}>
-            <Detail shoes={shoes} info={info} infoState={infoState} />
-          </infoContext.Provider>
-        </Route>
+          <Route path="/detail/:id">
+            <infoContext.Provider value={info}>
+              <Detail shoes={shoes} info={info} infoState={infoState} />
+            </infoContext.Provider>
+          </Route>
 
-        <Route path="/:id">
-          <div>아무거나 적었을 때는 이게 보여진다.</div>
-        </Route>
+          <Route path="/cart">
+            <Cart></Cart>
+          </Route>
 
-        {/* <Route path="/card" component={Image}></Route> */}
-      </Switch>
+          <Route path="/:id">
+            <div>아무거나 적었을 때는 이게 보여진다.</div>
+          </Route>
+
+          {/* <Route path="/card" component={Image}></Route> */}
+        </Switch>
+      </infoContext.Provider>
     </div>
   );
 }

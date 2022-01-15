@@ -95,7 +95,7 @@ function Detail(props) {
               checkTabState(0);
             }}
           >
-            Active
+            상품설명
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -106,7 +106,7 @@ function Detail(props) {
               checkTabState(1);
             }}
           >
-            Option2
+            배송정보
           </Nav.Link>
         </Nav.Item>
       </Nav>
