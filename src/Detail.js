@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { Nav } from "react-bootstrap";
+
+import { CSSTransition } from "react-transition-group";
+
 import styled from "styled-components";
 import "./Detail.scss";
 import { infoContext } from "./App";
@@ -17,6 +21,8 @@ function Detail(props) {
   let [alertShow, alertShowState] = useState(true);
   let [inputData, inputDataState] = useState("");
   let info = useContext(infoContext);
+  let [checkTab, checkTabState] = useState(0);
+  let [스위치, 스위치변경] = useState(false);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -79,8 +85,51 @@ function Detail(props) {
           </button>
         </div>
       </div>
+
+      <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-0"
+            onClick={() => {
+              스위치변경(false);
+              checkTabState(0);
+            }}
+          >
+            Active
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-1"
+            onClick={() => {
+              스위치변경(false);
+              checkTabState(1);
+            }}
+          >
+            Option2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+
+      <CSSTransition in={스위치} classNames="wow" timeout={1000}>
+        <TabContent checkTab={checkTab} 스위치변경={스위치변경} />
+      </CSSTransition>
     </div>
   );
+}
+
+function TabContent(props) {
+  useEffect(() => {
+    props.스위치변경(true);
+  });
+
+  if (props.checkTab === 0) {
+    return <div>0번째 내용입니다. </div>;
+  } else if (props.checkTab === 1) {
+    return <div>1번째 내용</div>;
+  } else if (props.checkTab === 2) {
+    return <div>2번째 내용입니다.</div>;
+  }
 }
 
 function Info(props) {

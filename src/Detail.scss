@@ -1,6 +1,15 @@
 // 2. @import
 @import "./_reset.scss";
 
+.wow-enter {
+  opacity: 0;
+}
+
+.wow-enter-active {
+  opacity: 1;
+  transition: all 1000ms;
+}
+
 // 1. 변수 사용
 $mainColor: #ff0000;
 .red {
