@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import "./Detail.scss";
+import { infoContext } from "./App";
 
 let 박스 = styled.div`
   padding-top: 30px;
@@ -15,6 +16,7 @@ let 제목 = styled.h4`
 function Detail(props) {
   let [alertShow, alertShowState] = useState(true);
   let [inputData, inputDataState] = useState("");
+  let info = useContext(infoContext);
 
   useEffect(() => {
     let timer = setTimeout(() => {

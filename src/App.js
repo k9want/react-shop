@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
 import shoesData from "./data";
@@ -6,6 +6,8 @@ import Detail from "./Detail";
 import axios from "axios";
 
 import { Link, Route, Switch } from "react-router-dom";
+
+export let infoContext = React.createContext();
 
 function App() {
   let [shoes, shoesState] = useState(shoesData);
@@ -46,15 +48,20 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Main
-            shoes={shoes}
-            shoesState={shoesState}
-            loading={loading}
-            loadingState={loadingState}
-          />
+          <infoContext.Provider value={info}>
+            <Main
+              shoes={shoes}
+              shoesState={shoesState}
+              loading={loading}
+              loadingState={loadingState}
+            />
+          </infoContext.Provider>
         </Route>
+
         <Route path="/detail/:id">
-          <Detail shoes={shoes} info={info} infoState={infoState} />
+          <infoContext.Provider value={info}>
+            <Detail shoes={shoes} info={info} infoState={infoState} />
+          </infoContext.Provider>
         </Route>
 
         <Route path="/:id">
@@ -82,6 +89,7 @@ function Main(props) {
             return <Card shoes={shoe} i={i} />;
           })}
         </div>
+
         <button
           className="btn btn-outline-secondary"
           onClick={() => {
@@ -117,6 +125,8 @@ function Main(props) {
 }
 
 function Card(props) {
+  let info = useContext(infoContext);
+
   return (
     <div className="col-md-4">
       <img
@@ -127,6 +137,7 @@ function Card(props) {
       <p>
         {props.shoes.content} & {props.shoes.price}원
       </p>
+      <p>재고 : {info[props.i]}</p>
     </div>
   );
 }
