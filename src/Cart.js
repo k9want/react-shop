@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 
 function Cart(props) {
+  let [count, countState] = useState(false);
+
   return (
     <div>
       {/* {props.state.map(shoe => {
@@ -30,7 +32,18 @@ function Cart(props) {
                   <button
                     className="btn btn-outline-secondary"
                     onClick={() => {
-                      props.dispatch({ type: "수량증가", payload: { id: i } });
+                      if (props.info[i] > 0) {
+                        props.dispatch({
+                          type: "수량증가",
+                          payload: { id: i },
+                        });
+                        let infoCopy = [...props.info];
+                        infoCopy[i]--;
+                        props.infoState(infoCopy);
+                        // console.log(props.infoCopy);
+                      } else {
+                        alert(`현재 해당 상품의 수량이 더 없습니다.`);
+                      }
                     }}
                   >
                     +
@@ -42,10 +55,14 @@ function Cart(props) {
                         type: "수량감소",
                         payload: { id: i, quan: shoe.quan },
                       });
+                      let infoCopy = [...props.info];
+                      infoCopy[i]++;
+                      props.infoState(infoCopy);
                     }}
                   >
                     -
                   </button>
+                  {}
                 </td>
               </tr>
             );

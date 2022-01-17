@@ -66,7 +66,7 @@ function App() {
           </Route>
 
           <Route path="/cart">
-            <Cart></Cart>
+            <Cart info={info} infoState={infoState}></Cart>
           </Route>
 
           <Route path="/:id">

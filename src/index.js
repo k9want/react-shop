@@ -64,6 +64,11 @@ function reducer(state = 기본state, 액션) {
     }
     return copy;
   } else if (액션.type === "항목추가") {
+    if (state.find(shoe => shoe.id === 액션.payload.id)) {
+      let copy = [...state];
+      copy[액션.payload.id].quan++;
+      return copy;
+    }
     let copy = [...state];
     copy.push(액션.payload);
     return copy;

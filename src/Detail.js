@@ -73,13 +73,17 @@ function Detail(props) {
           <button
             className="btn btn-outline-secondary detail-btn"
             onClick={() => {
-              props.infoState([9, 3, 5]);
-              props.dispatch({
-                type: "항목추가",
-                payload: { id: 6, name: "new converse", quan: 1, price: 75000 },
-              });
-              console.log(props.state);
-              history.push("/cart");
+              let infoCopy = [...props.info];
+              if (info[id] > 0) {
+                infoCopy[id]--;
+                props.infoState(infoCopy);
+                props.dispatch({
+                  type: "항목추가",
+                  payload: shoeId,
+                });
+                // console.log({ shoeId });
+                history.push("/cart");
+              }
             }}
           >
             주문하기
