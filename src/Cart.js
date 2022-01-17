@@ -30,7 +30,7 @@ function Cart(props) {
                   <button
                     className="btn btn-outline-secondary"
                     onClick={() => {
-                      props.dispatch({ type: "수량증가" });
+                      props.dispatch({ type: "수량증가", payload: { id: i } });
                     }}
                   >
                     +
@@ -38,7 +38,10 @@ function Cart(props) {
                   <button
                     className="btn btn-outline-secondary"
                     onClick={() => {
-                      props.dispatch({ type: "수량감소" });
+                      props.dispatch({
+                        type: "수량감소",
+                        payload: { id: i, quan: shoe.quan },
+                      });
                     }}
                   >
                     -

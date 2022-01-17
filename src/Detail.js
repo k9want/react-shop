@@ -7,7 +7,7 @@ import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import "./Detail.scss";
 import { infoContext } from "./App";
-import { connect, connectAdvanced } from "react-redux";
+import { connect } from "react-redux";
 
 let 박스 = styled.div`
   padding-top: 30px;
@@ -76,8 +76,9 @@ function Detail(props) {
               props.infoState([9, 3, 5]);
               props.dispatch({
                 type: "항목추가",
-                payload: { id: 2, name: "converse", quan: 1, price: 75000 },
+                payload: { id: 6, name: "new converse", quan: 1, price: 75000 },
               });
+              console.log(props.state);
               history.push("/cart");
             }}
           >

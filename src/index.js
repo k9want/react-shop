@@ -55,11 +55,13 @@ let 기본state = [
 function reducer(state = 기본state, 액션) {
   if (액션.type === "수량증가") {
     let copy = [...state];
-    copy[0].quan++;
+    copy[액션.payload.id].quan++;
     return copy;
   } else if (액션.type === "수량감소") {
     let copy = [...state];
-    copy[0].quan--;
+    if (액션.payload.quan > 0) {
+      copy[액션.payload.id].quan--;
+    }
     return copy;
   } else if (액션.type === "항목추가") {
     let copy = [...state];
@@ -72,7 +74,6 @@ let store = createStore(combineReducers({ reducer, reducer2 }));
 
 ReactDOM.render(
   <React.StrictMode>
-    R
     <BrowserRouter>
       <Provider store={store}>
         <App />
