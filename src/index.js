@@ -37,18 +37,23 @@ let 기본state = [
     quan: 2,
     price: 130000,
   },
-  { id: 3, name: "Good Shoe", quan: 5, price: 80000 },
+  {
+    id: 3,
+    title: "Flowery",
+    quan: 2,
+    price: 120000,
+  },
   {
     id: 4,
-    title: "SharkTale",
-    quan: 2,
-    price: 170000,
+    title: "Baby shoes",
+    quan: 1,
+    price: 120000,
   },
   {
     id: 5,
-    title: "Lacoste converse",
+    title: "Red Herring",
     quan: 1,
-    price: 150000,
+    price: 120000,
   },
 ];
 

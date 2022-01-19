@@ -16,7 +16,7 @@ let shoesData = [
   {
     id: 2,
     title: "Grey Yordan",
-    content: "Born in the States",
+    content: "Born in the State",
     price: 130000,
   },
 ];

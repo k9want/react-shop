@@ -6,6 +6,7 @@ import Detail from "./Detail";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
 import Cart from "./Cart";
+import { useHistory } from "react-router-dom";
 
 export let infoContext = React.createContext();
 
@@ -137,20 +138,24 @@ function Main(props) {
 
 function Card(props) {
   let info = useContext(infoContext);
+  let history = useHistory();
 
   return (
-    <div className="col-md-4">
-      <a href={`./detail/${props.shoes.id}`}>
-        <img
-          src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`}
-          width="100%"
-        />
-        <h4>{props.shoes.title}</h4>
-        <p>
-          {props.shoes.content} & {props.shoes.price}원
-        </p>
-        <p>재고 : {info[props.i]}</p>
-      </a>
+    <div
+      className="col-md-4 card-decoration"
+      onClick={() => {
+        history.push("/detail/" + props.shoes.id);
+      }}
+    >
+      <img
+        src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`}
+        width="100%"
+      />
+      <h4>{props.shoes.title}</h4>
+      <p>
+        {props.shoes.content} & {props.shoes.price}원
+      </p>
+      <p>재고 : {info[props.i]}</p>
     </div>
   );
 }

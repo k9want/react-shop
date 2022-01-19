@@ -1,9 +1,9 @@
-a {
+.card-decoration {
   text-decoration: none;
   text-decoration-line: none;
   color: grey;
 }
-a:hover {
+.card-decoration:hover {
   text-decoration: none;
   color: black;
 }

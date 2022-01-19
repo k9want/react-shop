@@ -138,9 +138,9 @@ function TabContent(props) {
   });
 
   if (props.checkTab === 0) {
-    return <div>0번째 내용입니다. </div>;
+    return <div>상품에 대한 설명입니다. </div>;
   } else if (props.checkTab === 1) {
-    return <div>1번째 내용</div>;
+    return <div>배송 정보를 알려줍니다.</div>;
   } else if (props.checkTab === 2) {
     return <div>2번째 내용입니다.</div>;
   }
