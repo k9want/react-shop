@@ -26,6 +26,21 @@ function Detail(props) {
   let [스위치, 스위치변경] = useState(false);
 
   useEffect(() => {
+    var data = localStorage.getItem("watched");
+    if (data == null) {
+      data = [];
+    } else {
+      data = JSON.parse(data);
+    }
+
+    data.push(id);
+    data = new Set(data);
+    data = [...data];
+
+    localStorage.setItem("watched", JSON.stringify(data));
+  }, []);
+
+  useEffect(() => {
     let timer = setTimeout(() => {
       alertShowState(false);
 
