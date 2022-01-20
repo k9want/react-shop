@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, lazy, Suspense } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
 import shoesData from "./data";
-import Detail from "./Detail";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
 import Cart from "./Cart";
 import { useHistory } from "react-router-dom";
+// import Detail from "./Detail";
+let Detail = lazy(() => import("./Detail.js"));
 
 export let infoContext = React.createContext();
 
@@ -62,7 +63,9 @@ function App() {
 
           <Route path="/detail/:id">
             <infoContext.Provider value={info}>
-              <Detail shoes={shoes} info={info} infoState={infoState} />
+              <Suspense fallback={<div>로딩중이에요</div>}>
+                <Detail shoes={shoes} info={info} infoState={infoState} />
+              </Suspense>
             </infoContext.Provider>
           </Route>
 
