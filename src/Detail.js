@@ -24,6 +24,7 @@ function Detail(props) {
   let info = useContext(infoContext);
   let [checkTab, checkTabState] = useState(0);
   let [스위치, 스위치변경] = useState(false);
+  let [watched, watchedState] = useState([]);
 
   useEffect(() => {
     var data = localStorage.getItem("watched");
@@ -38,6 +39,7 @@ function Detail(props) {
     data = [...data];
 
     localStorage.setItem("watched", JSON.stringify(data));
+    watchedState(data);
   }, []);
 
   useEffect(() => {
@@ -143,6 +145,29 @@ function Detail(props) {
       <CSSTransition in={스위치} classNames="wow" timeout={1000}>
         <TabContent checkTab={checkTab} 스위치변경={스위치변경} />
       </CSSTransition>
+
+      <Watch watched={watched} />
+    </div>
+  );
+}
+
+function Watch(props) {
+  return (
+    <div className="container watched-grey">
+      <p>최근 본 상품이미지</p>
+
+      {props.watched.map(prop => {
+        return (
+          <span>
+            <img
+              src={`https://codingapple1.github.io/shop/shoes${
+                parseInt(prop) + 1
+              }.jpg`}
+              width="20%"
+            />
+          </span>
+        );
+      })}
     </div>
   );
 }
