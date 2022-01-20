@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { connect, useSelector } from "react-redux";
@@ -86,9 +86,36 @@ function Cart(props) {
           </button>
         </div>
       ) : null}
+      <Parent 이름="k9want" 나이="20대"></Parent>
     </div>
   );
 }
+
+function Parent(props) {
+  return (
+    <div>
+      <Child1 이름={props.이름}></Child1>
+      <Child2 나이={props.나이}></Child2>
+    </div>
+  );
+}
+
+function Child1() {
+  useEffect(() => {
+    console.log("렌더링됨1");
+  });
+  return <div>memo( ) - example1</div>;
+}
+
+// memo() 사용
+// 하지만 단점이 있다. 기존 props와 바뀐 props 비교연산후 컴포넌트 업데이트할지 말지 결정하기에 props가 크고 복잡한 경우에는 이거로도 부담이 될수 있다.
+let Child2 = memo(function () {
+  useEffect(() => {
+    console.log("렌더링됨2");
+  });
+  return <div>memo( ) - example2</div>;
+});
+
 // 옛날 문법
 // function state를props화(state) {
 //   return {
